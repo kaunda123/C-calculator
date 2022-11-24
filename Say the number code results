@@ -1,4 +1,4 @@
-# Code for coverting numerical number (integers) to worded numbers.
+# Python code for coverting numerical numbers (integers) to worded numbers.
 
 def say_number(x):
     # Create a dictionary lists.
