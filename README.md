@@ -1,2 +1,5 @@
 # C-calculator
-A calculator made in C# language
+
+A simple calculator made in C# language
+
+Simply download the calculator and start doing calculations.
