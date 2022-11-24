@@ -1,0 +1,53 @@
+# Code for coverting numerical number (integers) to worded numbers.
+
+def say_number(x):
+    # Create a dictionary lists.
+    num_list = ['zero','one','two','three','four','five','six','seven','eight','nine']
+    pnum_list = ['ten','eleven','twelve','thirteen','fourteen','fithteen','sixteen','seventeen','eighteen','nineteen']
+    tens_list = ['ten','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety']
+    size_list = ['hundred and','','','','thousand','','','million,','','','billion,','','','trillion,']
+    
+    # Initiate some iteration variables.
+    x_list = ''
+    x_str = str(x)
+    num_count = len(x_str)
+    
+    # Iterate through each number.
+    while num_count >0:
+        if ((num_count==4) or (num_count==7) or (num_count==10) or (num_count==13)) and (len(x_str)==num_count):
+            x_list += num_list[int(x_str[len(x_str)-num_count])] + ' ' + size_list[num_count] + ' '
+            num_count -= 1
+        elif ((num_count==3) or (num_count==6) or (num_count==9) or (num_count==12) or (num_count==15)) and (int(x_str[len(x_str)-num_count])>0):
+            x_list += num_list[int(x_str[len(x_str)-num_count])] + ' ' + size_list[0] + ' '
+            num_count -= 1
+        elif (num_count==3) and (int(x_str[len(x_str)-num_count])==0):
+            x_list += 'and '
+            num_count -= 1 
+        elif ((num_count==2) or (num_count==5) or (num_count==8) or (num_count==11) or (num_count==14)) and (int(x_str[len(x_str)-num_count])>0):
+            if int(x_str[len(x_str)-num_count])==1:
+                x_list += pnum_list[int(x_str[len(x_str)-num_count+1])] + ' '
+                num_count -= 2
+                if num_count>0:
+                    x_list += size_list[num_count+1] + ' '
+            else:
+                x_list += tens_list[int(x_str[len(x_str)-num_count])-1]
+                num_count -= 1
+                if int(x_str[len(x_str)-num_count])==0:
+                    x_list += ' '
+                    num_count -= 1
+                elif num_count>0:
+                    x_list += ' ' + num_list[int(x_str[len(x_str)-num_count])] + ' '
+                    num_count -= 1
+                if num_count>0:
+                    x_list += size_list[num_count+1] + ' '
+        elif len(x_str)==1:
+            x_list =   num_list[int(x_str[len(x_str)-num_count])]        
+            num_count -= 1
+        elif int(x_str[len(x_str)-num_count])==0:
+            num_count -= 1
+        
+        
+    x_list =x_list[:-1]+'.'
+    x_list = x_list[0].upper()+x_list[1:]
+    x_list = x_list.replace('thousand,','thousand and')
+    return x_list
